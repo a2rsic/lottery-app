@@ -1,0 +1,12 @@
+.current-ticket {
+    border: 1px solid grey;
+    margin: 10px;
+    height: 50px;
+    width: 300px;
+    display: flex;
+}
+
+span {
+    margin: 10px;
+    border: 1px solid grey;
+}
