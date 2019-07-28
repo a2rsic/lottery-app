@@ -1,0 +1,10 @@
+.numbers-container {
+    margin: 10px;
+    width: 20px;
+}
+
+.btn-number {
+    border: 0;
+    border-radius: 50%;
+    color: white;
+}
