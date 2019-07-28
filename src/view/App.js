@@ -3,6 +3,7 @@ import React from 'react';
 import '../App.css';
 import { Header } from './common/header/Header';
 import { NumbersList } from './section-one/NumbersList';
+import { Ticket } from '../view/section-two/Ticket';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Header />
       <main>
         <NumbersList />
+        <Ticket />
       </main>
     </>
   );
