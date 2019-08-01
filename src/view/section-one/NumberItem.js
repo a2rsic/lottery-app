@@ -18,7 +18,12 @@ const NumberItem = (props) => {
 
     return (
         <div className="numbers-container">
-            <button disabled={!canSelect} value={i} style={{ backgroundColor }} onClick={onNumberClick} className="btn-number" >{i}</button>
+            <button
+                disabled={!canSelect}
+                value={i}
+                style={{ backgroundColor }}
+                onClick={onNumberClick}
+                className="btn-number" >{i}</button>
         </div>
     )
 
