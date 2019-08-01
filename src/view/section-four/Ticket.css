@@ -1,0 +1,18 @@
+.current-ticket {
+    display: flex;
+    margin: 10px;
+    height: 53px;
+    width: 265px;
+}
+
+.selected-number {
+    margin: 5px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
