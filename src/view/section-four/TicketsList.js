@@ -9,7 +9,7 @@ class TicketsList extends Component {
 
     render() {
 
-        const text = this.props.tickets.length === 0 ? <p>Nema dodatih tiketa</p> : '';
+        const text = this.props.tickets.length === 0 ? <p>Nema dodatih tiketa <br /> Tiket može da sadrži minimun jedan, a maksimun pet izabranih brojeva</p> : '';
 
         return (
             <>
