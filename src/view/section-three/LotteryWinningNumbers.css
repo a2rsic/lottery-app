@@ -1,10 +1,15 @@
 .winning-numbers-container {
     width: 370px;
+    height: 138px;
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.play-lottery {
+    color: gray;
+    text-align: center;
 }
 
 .random-numbers {
@@ -12,7 +17,7 @@
     width: 46px;
     height: 46px;
     border-radius: 50%;
-    background-color: green;
+    background-color: yellowgreen;
     color: white;
     display: flex;
     justify-content: center;

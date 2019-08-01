@@ -1,31 +1,50 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 
 import './NumberItem.css'
 
-const NumberItem = (props) => {
+class NumberItem extends Component {
 
-    const [isSelected, setSelected] = useState(false);
-    const { number: i, onNumberSelect, canSelect } = props;
-
-    const backgroundColor = isSelected ? 'red' : 'green';
-
-    const onNumberClick = (event) => {
-        const { value } = event.target;
-        onNumberSelect(value);
-
-        setSelected(prevSelected => !prevSelected)
+    constructor(props) {
+        super(props)
+        this.state = {
+            isSelected: false,
+        }
     }
 
-    return (
-        <div className="numbers-container">
-            <button
-                disabled={!canSelect}
-                value={i}
-                style={{ backgroundColor }}
-                onClick={onNumberClick}
-                className="btn-number" >{i}</button>
-        </div>
-    )
+    onNumberClick = (event) => {
+        const { value } = event.target;
+        this.props.onNumberSelect(value);
+
+        // setSelected(prevSelected => !prevSelected)
+        // this.setState((prevState) =>
+        //     ({ isSelected: !prevState.isSelected })
+        // )
+        this.setState({
+            isSelected: !this.state.isSelected
+        })
+    }
+
+    render() {
+        const { isSelected } = this.state;
+        let backgroundColor = 'green';
+        if (this.props.ticketCounter.length !== 0 && isSelected) {
+            backgroundColor = 'red';
+        } else {
+            backgroundColor = 'green'
+        }
+
+
+        return (
+            <div className="numbers-container">
+                <button
+                    disabled={!this.props.canSelect}
+                    value={this.props.number}
+                    style={{ backgroundColor }}
+                    onClick={this.onNumberClick}
+                    className="btn-number" >{this.props.number}</button>
+            </div>
+        )
+    }
 
 }
 

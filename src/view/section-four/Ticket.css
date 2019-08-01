@@ -1,8 +1,7 @@
 .current-ticket {
     display: flex;
     margin: 10px;
-    height: 53px;
-    width: 265px;
+    height: 58px;
 }
 
 .selected-number {
@@ -10,7 +9,7 @@
     width: 46px;
     height: 46px;
     border-radius: 50%;
-    background-color: red;
+    background-color: yellowgreen;
     color: white;
     display: flex;
     justify-content: center;

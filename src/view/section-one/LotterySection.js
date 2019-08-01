@@ -40,7 +40,8 @@ class LotterySection extends Component {
             return <NumberItem
                 key={i} number={number}
                 canSelect={this.state.canSelectNumber}
-                onNumberSelect={this.onClickSelectNumber} />
+                onNumberSelect={this.onClickSelectNumber}
+                ticketCounter={this.state.currentTicket} />
         })
     }
 
@@ -55,7 +56,6 @@ class LotterySection extends Component {
     onClickGetWinningNumbers = () => {
         this.props.onPlayLottery()
     }
-
 
 
     render() {
@@ -75,10 +75,10 @@ class LotterySection extends Component {
                             disabled={this.state.currentTicket.length === 0}
                             type="button"
                             onClick={this.onClickAddTicket}
-                            value="Dodaj tiket" />}
+                            value="DODAJ TIKET" />}
                         {showPlayButton && <input type="button"
                             onClick={this.onClickGetWinningNumbers}
-                            value="Odigraj" />}
+                            value="ODIGRAJ" />}
                     </div>
                 </div>
             </>

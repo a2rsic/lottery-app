@@ -5,25 +5,24 @@ import { Ticket } from './Ticket';
 
 class TicketsList extends Component {
 
-    checkWinningTicket(lotteryNumbers, ticketNumbers) {
-        let ticketResult = '';
 
-        lotteryNumbers.forEach(lotteryNumber => ticketNumbers.forEach(ticketNumber => {
-            if (lotteryNumber === ticketNumber) {
-                return ticketResult = 'DOBITAN'
-            } else {
-                return ticketResult = 'GUBITAN'
-            }
-        }))
-        return ticketResult;
-    }
 
     render() {
+
+        const text = this.props.tickets.length === 0 ? <p>Nema dodatih tiketa</p> : '';
+
         return (
             <>
                 <div className="tickets-container">
+                    <div className="no-tickets">
+                        {text}
+                    </div>
                     {this.props.tickets.map((ticketNumbers, i) => {
-                        return <Ticket key={i} ticketNumbers={ticketNumbers} ticketResult={this.checkWinningTicket(this.props.lotteryNumbers, this.props.tickets)} />
+                        return <Ticket
+                            key={i}
+                            ticketNumbers={ticketNumbers}
+                            lotteryNumbers={this.props.lotteryNumbers}
+                        />
                     })}
                 </div>
             </>

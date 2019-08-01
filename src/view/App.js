@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import '../App.css';
 import { Header } from './common/header/Header';
@@ -6,7 +6,7 @@ import { LotterySection } from './section-one/LotterySection';
 import { TicketsList } from './section-four/TicketsList';
 import { LotteryWinningNumbers } from './section-three/LotteryWinningNumbers';
 
-class App extends React.Component {
+class App extends Component {
   state = {
     tickets: [],
     canSelecNumber: true,
@@ -41,9 +41,9 @@ class App extends React.Component {
   onGetWinningNumbers = () => {
     let interval = setInterval(() => {
 
-      if (this.state.currentNumber === this.state.randomNumbers.length - 1) {
-        clearInterval(interval);
+      if (this.state.randomNumbers.length === 12) {
         interval = 0;
+        clearInterval(interval);
         return;
       }
 
@@ -59,8 +59,8 @@ class App extends React.Component {
     }, 2000)
   }
 
-
   render() {
+
     return (
       <>
         <Header />
@@ -69,15 +69,17 @@ class App extends React.Component {
             ticketsCount={this.state.tickets.length}
             onAddTicket={this.onAddTicket}
             onPlayLottery={this.onGetWinningNumbers} />
-          <div className="tickets-list-container">
-            <TicketsList
-              canSelect={this.state.canSelecNumber}
-              tickets={this.state.tickets}
-              lotteryNumbers={this.state.randomNumbers} />
-          </div>
-          <div className="winning-numbers">
-            <LotteryWinningNumbers
-              randomNumbers={this.state.randomNumbers} />
+          <div className="section">
+            <div className="tickets-list-container">
+              <TicketsList
+                canSelect={this.state.canSelecNumber}
+                tickets={this.state.tickets}
+                lotteryNumbers={this.state.randomNumbers} />
+            </div>
+            <div className="winning-numbers">
+              <LotteryWinningNumbers
+                randomNumbers={this.state.randomNumbers} />
+            </div>
           </div>
 
         </main>
