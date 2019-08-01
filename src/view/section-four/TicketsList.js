@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
 
-// import { Ticket } from '../section-two/Ticket';
 import './TicketsList.css';
-import { CurrentTicket } from './CurrentTicket';
+import { Ticket } from './Ticket';
 
 class TicketsList extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {}
+
+    checkWinningTicket(lotteryNumbers, ticketNumbers) {
+        let ticketResult = '';
+
+        lotteryNumbers.forEach(lotteryNumber => ticketNumbers.forEach(ticketNumber => {
+            if (lotteryNumber === ticketNumber) {
+                return ticketResult = 'DOBITAN'
+            } else {
+                return ticketResult = 'GUBITAN'
+            }
+        }))
+        return ticketResult;
     }
 
     render() {
         return (
             <>
                 <div className="tickets-container">
-                    <CurrentTicket />
+                    {this.props.tickets.map((ticketNumbers, i) => {
+                        return <Ticket key={i} ticketNumbers={ticketNumbers} ticketResult={this.checkWinningTicket(this.props.lotteryNumbers, this.props.tickets)} />
+                    })}
                 </div>
-                {/* // <Ticket /> */}
             </>
         )
     }
