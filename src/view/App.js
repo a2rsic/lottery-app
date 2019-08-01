@@ -2,21 +2,88 @@ import React from 'react';
 
 import '../App.css';
 import { Header } from './common/header/Header';
-import { NumbersList } from './section-one/NumbersList';
-// import { Ticket } from '../view/section-two/Ticket';
-// import { TicketsList } from './section-four/TicketsList';
+import { LotterySection } from './section-one/LotterySection';
+import { TicketsList } from './section-four/TicketsList';
+import { LotteryWinningNumbers } from './section-three/LotteryWinningNumbers';
 
-function App() {
-  return (
-    <>
-      <Header />
-      <main>
-        <NumbersList />
-        {/* <TicketsList /> */}
-        {/* <Ticket /> */}
-      </main>
-    </>
-  );
+class App extends React.Component {
+  state = {
+    tickets: [],
+    canSelecNumber: true,
+    allNumbers: this.setRandomNumbersArr(),
+    currentNumber: 0,
+    randomNumbers: []
+  }
+
+  onAddTicket = (currentTicket) => {
+    const tickets = this.state.tickets;
+    tickets.push(currentTicket)
+
+    this.setState({
+      tickets
+    })
+  }
+
+  setRandomNumbersArr() {
+    const createNumberArray = Array(12).fill(-1);
+
+    const randomNumbersArray = createNumberArray.map((e, i, array) => {
+      let newNum = Math.floor(Math.random() * (31 - 1)) + 1;
+
+      if (array.includes(newNum)) {
+        newNum = Math.floor(Math.random() * (31 - 1)) + 1;
+      }
+      return newNum
+    })
+    return randomNumbersArray;
+  }
+
+  onGetWinningNumbers = () => {
+    let interval = setInterval(() => {
+
+      if (this.state.currentNumber === this.state.randomNumbers.length - 1) {
+        clearInterval(interval);
+        interval = 0;
+        return;
+      }
+
+      this.setState((prevState) => ({
+        randomNumbers: [
+          ...prevState.randomNumbers,
+          this.state.allNumbers[this.state.currentNumber]
+        ],
+        currentNumber: prevState.currentNumber + 1,
+
+      }))
+
+    }, 2000)
+  }
+
+
+  render() {
+    return (
+      <>
+        <Header />
+        <main>
+          <LotterySection
+            ticketsCount={this.state.tickets.length}
+            onAddTicket={this.onAddTicket}
+            onPlayLottery={this.onGetWinningNumbers} />
+          <div className="tickets-list-container">
+            <TicketsList
+              canSelect={this.state.canSelecNumber}
+              tickets={this.state.tickets}
+              lotteryNumbers={this.state.randomNumbers} />
+          </div>
+          <div className="winning-numbers">
+            <LotteryWinningNumbers
+              randomNumbers={this.state.randomNumbers} />
+          </div>
+
+        </main>
+      </>
+    );
+  }
 }
 
 export default App;
