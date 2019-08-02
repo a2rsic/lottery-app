@@ -2,20 +2,29 @@ import React, { Component } from 'react';
 
 import '../App.css';
 import { Header } from './common/header/Header';
-import { LotterySection } from './section-one/LotterySection';
-import { TicketsList } from './section-four/TicketsList';
-import { LotteryWinningNumbers } from './section-three/LotteryWinningNumbers';
+import { LotterySection } from './lottery-numbers/LotterySection';
+import { TicketsList } from './tickets-list/TicketsList';
+import { LotteryWinningNumbers } from './winning-numbers/LotteryWinningNumbers';
 
 class App extends Component {
+  intervalID = 0;
+
   state = {
     tickets: [],
-    canSelecNumber: true,
-    allNumbers: this.setRandomNumbersArr(),
+    allNumbers: this.generateLotteryNumbers(),
     currentNumber: 0,
     randomNumbers: []
   }
 
+  componentWillUnmount() {
+    clearInterval(this.intervalID)
+  }
+
   onAddTicket = (currentTicket) => {
+    if (!currentTicket.length) {
+      window.alert('Mora biti selektovan najmanje jedan broj')
+      return;
+    }
     const tickets = this.state.tickets;
     tickets.push(currentTicket)
 
@@ -24,27 +33,25 @@ class App extends Component {
     })
   }
 
-  setRandomNumbersArr() {
-    const createNumberArray = Array(12).fill(-1);
-
-    const randomNumbersArray = createNumberArray.map((e, i, array) => {
-      let newNum = Math.floor(Math.random() * (31 - 1)) + 1;
-
-      if (array.includes(newNum)) {
-        newNum = Math.floor(Math.random() * (31 - 1)) + 1;
-      }
-      return newNum
-    })
-    return randomNumbersArray;
+  generateLotteryNumbers() {
+    let numbersArray = [];
+    while (numbersArray.length < 12) {
+      let randomNumber = Math.round(Math.random() * (31 - 1)) + 1
+      numbersArray.push(randomNumber)
+      numbersArray = Array.from(new Set(numbersArray))
+    }
+    return numbersArray;
   }
 
   onGetWinningNumbers = () => {
-    let interval = setInterval(() => {
-
+    this.intervalID = setInterval(() => {
       if (this.state.randomNumbers.length === 12) {
-        interval = 0;
-        clearInterval(interval);
-        return;
+        clearInterval(this.intervalID)
+        setTimeout(() => {
+          const { randomNumbers } = this.state
+          this.setState({ randomNumbers: randomNumbers.sort((a, b) => a - b) })
+        }, 1500)
+        return
       }
 
       this.setState((prevState) => ({
@@ -68,11 +75,11 @@ class App extends Component {
           <LotterySection
             ticketsCount={this.state.tickets.length}
             onAddTicket={this.onAddTicket}
-            onPlayLottery={this.onGetWinningNumbers} />
+            onPlayLottery={this.onGetWinningNumbers}
+            gamePlayed={this.state.randomNumbers.length === 12} />
           <div className="section">
             <div className="tickets-list-container">
               <TicketsList
-                canSelect={this.state.canSelecNumber}
                 tickets={this.state.tickets}
                 lotteryNumbers={this.state.randomNumbers} />
             </div>

@@ -1,9 +1,0 @@
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 220px;
-    border: 1px solid grey;
-    margin: 10px;
-    justify-content: space-between;
-    padding: 7px;
-}

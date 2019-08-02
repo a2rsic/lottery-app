@@ -10,6 +10,9 @@
 .play-lottery {
     color: gray;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .random-numbers {
@@ -17,7 +20,7 @@
     width: 46px;
     height: 46px;
     border-radius: 50%;
-    background-color: yellowgreen;
+    background-color:royalblue;
     color: white;
     display: flex;
     justify-content: center;
